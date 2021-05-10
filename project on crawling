@@ -1,0 +1,19 @@
+from selenium import webdriver
+import time
+import csv
+driver= webdriver.Chrome( r'C:\Program Files (x86)\chromedriver.exe')
+with open('mausam.csv','w') as f:
+    f.write("Places, Tempeature\n")
+    #getting the url
+driver.get("https://www.weather-forecast.com/countries/Nepal")
+
+
+place=driver.find_elements_by_xpath('//span[@class="b-list-table__item-name"]')
+tempeature= driver.find_elements_by_xpath('//div[@class="tempcell"]')
+number= len(place)
+
+with open('mausam.csv','a') as f:
+    for i in range(number):
+        f.write(place[i].text + "," + tempeature[i].text  + "\n")
+time.sleep(10)
+driver.quit()
